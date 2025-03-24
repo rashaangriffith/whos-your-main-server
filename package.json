@@ -7,11 +7,15 @@
     "start": "nodemon app.ts",
     "test": "test",
     "generate": "prisma generate",
-    "migrate_dev": "prisma migrate dev"
+    "migrate_dev": "prisma migrate dev",
+    "migrate_reset": "prisma migrate reset"
   },
   "author": "",
   "license": "ISC",
   "type": "module",
+  "prisma": {
+    "seed": "ts-node --transpile-only prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.5.0",
     "cors": "^2.8.5",
