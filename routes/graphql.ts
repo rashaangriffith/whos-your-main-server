@@ -3,10 +3,12 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
+  buildSchema,
 } from "graphql";
+import { createHandler } from "graphql-http/lib/use/express";
 
-const { buildSchema } = require("graphql");
-const { createHandler } = require("graphql-http/lib/use/express");
+// const { buildSchema } = require("graphql");
+// const { createHandler } = require("graphql-http/lib/use/express");
 
 // const schema = buildSchema(`type Query { hello: String }`);
 
@@ -32,4 +34,5 @@ const graphqlHandler = createHandler({
   schema,
 });
 
-module.exports = graphqlHandler;
+// module.exports = graphqlHandler;
+export default graphqlHandler;

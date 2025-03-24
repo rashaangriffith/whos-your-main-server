@@ -1,10 +1,9 @@
-import { Request, Response } from "express";
+import express from "express";
 
-const express = require("express");
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/", (req: express.Request, res: express.Response) => {
   res.send("Who's your main homey?");
 });
 
-module.exports = router;
+export default router;
