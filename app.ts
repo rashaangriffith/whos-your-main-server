@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import indexRoute from "./routes/index.ts";
 import usersRoute from "./routes/users.ts";
+import gamesRoute from "./routes/games.ts";
 import graphqlRoute from "./routes/graphql.ts";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/", indexRoute);
 app.use("/users", usersRoute);
+app.use("/games", gamesRoute);
 app.use("/graphql", graphqlRoute);
 
 app.listen(port, (error: any) => {
