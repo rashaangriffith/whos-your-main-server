@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int     @id @default(autoincrement())
+  email       String   @unique
+  firstName   String?
+  lastName    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userGameCharacters UserGameCharacter[]
+}
+
+model Game {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  year        Int?
+  platform    String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  characters  Character[]
+  gameCharacters GameCharacter[]
+}
+
+model Character {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+  gameId      Int
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  game        Game     @relation(fields: [gameId], references: [id])
+  gameCharacters GameCharacter[]
+}
+
+model GameCharacter {
+  id          Int     @id @default(autoincrement())
+  gameId      Int
+  characterId Int
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  game        Game     @relation(fields: [gameId], references: [id])
+  character   Character @relation(fields: [characterId], references: [id])
+  userGameCharacters UserGameCharacter[]
+}
+
+model UserGameCharacter {
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  gameCharacterId Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User          @relation(fields: [userId], references: [id])
+  gameCharacter GameCharacter @relation(fields: [gameCharacterId], references: [id])
+}
