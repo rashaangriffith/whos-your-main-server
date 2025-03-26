@@ -8,6 +8,7 @@ router.get("/", async (req: express.Request, res: express.Response) => {
     const games = await prisma.game.findMany({
       include: {
         characters: true,
+        gameCharacters: true,
       },
     });
     res.send(games);
